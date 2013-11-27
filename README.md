@@ -1,4 +1,4 @@
-Game
+Medieval
 ====
 
-Game with images made in MS Paint
+Medieval game with images made in MS Paint
