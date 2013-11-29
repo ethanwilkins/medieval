@@ -39,5 +39,6 @@ class User {
     } else if (classChoice == "ranger") {
       
     }
+    ei.gameState = "game";
   }
 }
