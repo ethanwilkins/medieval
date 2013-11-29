@@ -3,9 +3,9 @@ class Gui {
   int choiceState;
   
   Gui () {
-    warrior = new Button(width*0.3, height*0.48, user.warrior.warriorRight);
-    wizard = new Button(width*0.3, height*0.48, user.warrior.warriorRight);
-    ranger = new Button(width*0.3, height*0.48, user.warrior.warriorRight);
+    warrior = new Button(width*0.3, height*0.48, user.warrior.idleRight);
+    wizard = new Button(width*0.3, height*0.48, user.warrior.idleRight);
+    ranger = new Button(width*0.3, height*0.48, user.warrior.idleRight);
     forward = new Button(width*0.9, height/2, loadImage("forward.png"));
     backward = new Button(width*0.1, height/2, loadImage("backward.png"));
     choiceState = 0;
@@ -16,43 +16,32 @@ class Gui {
   }
   
   void classChoice() {
+    String title = " ", description = " ";
     if (ei.gameState == "classChoice") {
       forward.display();
       backward.display();
-      textSize(50);
-      textAlign(CENTER);
       switch (choiceState) {
         case 0:
-          // title
-          text("Warrior", width*0.55, height*0.3);
-          // description
-          textSize(30);
-          text("Slay your enemies with sword and shield.",
-            width*0.42, height*0.45, 400, 400);
-          // the actual button
+          title = user.warrior.title;
+          description = user.warrior.description;
           warrior.display();
           break;
         case 1:
-          // title
-          text("Wizard", width*0.55, height*0.3);
-          // description
-          textSize(30);
-          text("Destroy your foes with powerful magic.",
-            width*0.42, height*0.45, 400, 400);
-          // the actual button
+          title = user.wizard.title;
+          description = user.wizard.description;
           wizard.display();
           break;
         case 2:
-          // title
-          text("Ranger", width*0.55, height*0.3);
-          // description
-          textSize(30);
-          text("Take down your enemies from afar with bow and arrow.",
-            width*0.42, height*0.45, 400, 400);
-          // the actual button
+          title = user.ranger.title;
+          description = user.ranger.description;
           ranger.display();
           break;
       }
+      textAlign(CENTER);
+      textSize(50);
+      text(title, width*0.55, height*0.3);
+      textSize(30);
+      text(description, width*0.42, height*0.45, 400, 400);
     }
   }
   
