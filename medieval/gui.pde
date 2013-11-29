@@ -14,7 +14,8 @@ class Gui {
       textSize(50);
       textAlign(CENTER);
       text("Choose a class.", width/2, height*0.2);
-      text("Warrior", width/2, height*0.8);
+      text("Warrior", width/2, height*0.7);
+      text("The Warrior Class!", width/2, height*0.8);
       warrior.display();
     }
   }
