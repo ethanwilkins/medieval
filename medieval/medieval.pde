@@ -1,14 +1,20 @@
+Engine ei;
 Environment env;
 User user;
+Gui gui;
 
 void setup() {
   size(displayWidth, displayHeight);
   orientation(LANDSCAPE);
-  env = new Environment();
-  user = new User();
+  ei = new Engine();
+  ei.bootStrap();
 }
 
 void draw() {
-  env.display();
-  user.display();
+  background(0);
+  ei.display();
+}
+
+void mousePressed() {
+  ei.checkButtons();
 }

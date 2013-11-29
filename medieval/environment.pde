@@ -3,9 +3,6 @@ class Environment {
   
   Environment () {
     background = loadImage("background.png");
-    if (width != 1280 && height != 720) {
-      background.resize(0, height);
-    }
   }
   
   void display() {
