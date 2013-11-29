@@ -1,11 +1,14 @@
 class User {
   Warrior warrior;
+  Wizard wizard;
+  Ranger ranger;
   PVector location, speed;
   PImage userImg;
   
   User () {
     warrior = new Warrior();
-    userImg = warrior.warriorRight;
+    wizard = new Wizard();
+    ranger = new Ranger();
     location = new PVector(width/2, 475);
     speed = new PVector(3.5, 0);
   }
@@ -25,6 +28,16 @@ class User {
         userImg = warrior.warriorLeft;
         location.sub(speed);
       }
+    }
+  }
+  
+  void setUserClass(String classChoice) {
+    if (classChoice == "warrior") {
+       userImg = warrior.warriorRight;
+    } else if (classChoice == "wizard") {
+      
+    } else if (classChoice == "ranger") {
+      
     }
   }
 }

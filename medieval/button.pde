@@ -13,7 +13,6 @@ class Button {
   void display() {
     imageMode(CENTER);
     image(graphic, x, y);
-    rectMode(CENTER);
   }
   
   boolean overButton() {

@@ -22,6 +22,7 @@ class Gui {
   void checkClassChoice() {
     if (ei.gameState == "classChoice") {
       if (warrior.overButton()) {
+        user.setUserClass("warrior");
         ei.gameState = "game";
       }
     }
