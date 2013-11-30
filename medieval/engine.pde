@@ -9,9 +9,8 @@ class Engine {
   void displayGame() {
     if (gameState == "game") {
       env.display();
-      user.display();
-      //If User in Game Display QuestGiver Also QuestGiver drawn b4 user? No Idea What The Issue is.
       que.display();
+      user.display();
     }
   }
   
