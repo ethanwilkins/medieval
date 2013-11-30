@@ -1,8 +1,8 @@
 Engine ei;
 Environment env;
+Quest que;
 User user;
 Gui gui;
-Questgiver que;
 
 void setup() {
   size(displayWidth, displayHeight);

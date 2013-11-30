@@ -1,3 +1,5 @@
+// Environment holds all backgrounds and environmental objects i.e. loot
+
 class Environment {
   PImage background;
   

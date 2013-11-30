@@ -1,5 +1,6 @@
 class Gui {
   Button warrior, wizard, ranger, forward, backward;
+  // keeps the state of the class choice and possibly later choices
   int choiceState;
   
   Gui () {
@@ -16,10 +17,13 @@ class Gui {
   }
   
   void classChoice() {
+    // class choice screen 
     String title = " ", description = " ";
     if (ei.gameState == "classChoice") {
+      // back/forward buttons
       forward.display();
       backward.display();
+      // which character to display
       switch (choiceState) {
         case 0:
           title = user.warrior.title;
@@ -46,6 +50,7 @@ class Gui {
   }
   
   void checkClassChoice() {
+    // check character buttons
     if (ei.gameState == "classChoice") {
       if (warrior.overButton() && choiceState == 0) {
         user.setUserClass("warrior");
@@ -53,7 +58,8 @@ class Gui {
         user.setUserClass("wizard");
       } else if (ranger.overButton() && choiceState == 2) {
         user.setUserClass("ranger");
-      } else if (forward.overButton()) {
+      } // check back/forward
+      else if (forward.overButton()) {
         if (choiceState < 2) {
           choiceState++;
         } else choiceState = 0;

@@ -5,6 +5,7 @@ class User {
   PVector location, speed;
   PImage userImg;
   float distTraveled;
+  String chosenClass;
   
   User () {
     warrior = new Warrior();
@@ -22,23 +23,36 @@ class User {
   }
   
   void walk() {
-    warrior.warriorWalk();
+    // walk animation for class
+    if (chosenClass == "warrior") {
+      warrior.walk();
+    } else if (chosenClass == "wizard") {
+      wizard.walk();
+    } else if (chosenClass == "ranger") {
+      ranger.walk();
+    }
+    // moves user based on mouse/touch
     if (dist(mouseX, 0, location.x, 0) > 5) {
       if (mouseX > location.x) {
         location.add(speed);
       } else if (mouseX < location.x) {
         location.sub(speed);
-      } distTraveled += speed.x;
+      } // dist for walk animation
+      distTraveled += speed.x;
     }
   }
   
   void setUserClass(String classChoice) {
+    // will set the users class and corresponding variables
     if (classChoice == "warrior") {
-       userImg = warrior.idleRight;
+      chosenClass = "warrior";
+      userImg = warrior.idleRight;
     } else if (classChoice == "wizard") {
-       userImg = warrior.idleRight;
+        chosenClass = "wizard";
+        userImg = warrior.idleRight;
     } else if (classChoice == "ranger") {
-       userImg = warrior.idleRight;
+        chosenClass = "ranger";
+        userImg = warrior.idleRight;
     }
     ei.gameState = "game";
   }

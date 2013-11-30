@@ -17,7 +17,7 @@ class Warrior {
     title = "Warrior";
   }
   
-  void warriorWalk() {
+  void walk() {
     // change step image if distTraveled % 20 == 0
     if (user.distTraveled % 20 == 0) {
       if (step < 1) {

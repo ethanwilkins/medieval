@@ -1,3 +1,5 @@
+// Engine class ties the game together, interfacing all the classes to the main file, medieval
+
 class Engine {
   String gameState;
   
@@ -7,6 +9,7 @@ class Engine {
   }
   
   void displayGame() {
+    // displays all parts of game
     if (gameState == "game") {
       env.display();
       que.display();
@@ -19,11 +22,12 @@ class Engine {
   }
   
   void bootStrap() {
+    // starts the game, can be called for restart
     gameState = "classChoice";
     env = new Environment();
+    // QuestGiver Display
+    que = new Quest();
     user = new User();
     gui = new Gui();
-    //QuestGiver Display
-      que = new Questgiver();
   }
 }
