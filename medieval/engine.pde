@@ -10,6 +10,8 @@ class Engine {
     if (gameState == "game") {
       env.display();
       user.display();
+      //If User in Game Display QuestGiver Also QuestGiver drawn b4 user? No Idea What The Issue is.
+      que.display();
     }
   }
   
@@ -22,5 +24,7 @@ class Engine {
     env = new Environment();
     user = new User();
     gui = new Gui();
+    //QuestGiver Display
+      que = new Questgiver();
   }
 }

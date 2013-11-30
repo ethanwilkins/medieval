@@ -2,6 +2,7 @@ Engine ei;
 Environment env;
 User user;
 Gui gui;
+Questgiver que;
 
 void setup() {
   size(displayWidth, displayHeight);
