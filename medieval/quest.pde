@@ -1,18 +1,26 @@
+// Quest class for quest lines, characters, objectives, and rewards
+
 class Quest {
   
   //NOI = NO IMAGE
-    PImage NOI;
+  PImage questGiver;
   
   //NOI = LoadImage Logic 
   //Path /Data Name NoImage.PNG
   Quest () {
-    NOI = loadImage("NoImage.png");
+    // using this image for now
+    questGiver = loadImage("questGiver.png");
   }
   
- //Display Image (NOI, X, Y, W%, H%) 
   void display() {
+    questGiver();
+  }
+  
+  //Display Image (NOI, X, Y, W%, H%) 
+  void questGiver() {
   //image(NOI, 0, 0);
-  image(NOI, 60, 520, width/10, height/10);
+  imageMode(CENTER);
+  image(questGiver, width/10, 475);
   }
 }
 
