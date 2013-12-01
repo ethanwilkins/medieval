@@ -12,7 +12,6 @@ class User {
     wizard = new Wizard();
     ranger = new Ranger();
     location = new PVector(width/2, 475);
-    speed = new PVector(3.5, 0);
     distTraveled = 0;
   }
   
@@ -47,6 +46,7 @@ class User {
     if (classChoice == "warrior") {
       chosenClass = "warrior";
       userImg = warrior.idleRight;
+      speed = warrior.speed;
     } else if (classChoice == "wizard") {
         chosenClass = "wizard";
         userImg = warrior.idleRight;

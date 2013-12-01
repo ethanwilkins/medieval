@@ -1,4 +1,5 @@
 class Warrior {
+  PVector speed;
   PImage idleRight, idleLeft,
     walkingRight1, walkingLeft1,
     walkingRight2, walkingLeft2,
@@ -11,13 +12,14 @@ class Warrior {
   
   Warrior () {
     loadWarrior();
+    speed = new PVector(2.5, 0);
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
   }
   
   void walk() {
     // change step image if distTraveled
-    if (user.distTraveled % 10 == 0) {
+    if (user.distTraveled % 9 == 0) {
       if (step < 5) {
         step++;
       } else step = 0;
@@ -75,17 +77,17 @@ class Warrior {
   }
   
   void loadWarrior() {
-    idleRight = loadImage("warriorRight.png");
-    idleLeft = loadImage("warriorLeft.png");
-    walkingRight1 = loadImage("warriorWalkingRight1.png");
-    walkingLeft1 = loadImage("warriorWalkingLeft1.png");
-    walkingRight2 = loadImage("warriorWalkingRight2.png");
-    walkingLeft2 = loadImage("warriorWalkingLeft2.png");
-    walkingRight3 = loadImage("warriorWalkingRight3.png");
-    walkingLeft3 = loadImage("warriorWalkingLeft3.png");
-    walkingRight5 = loadImage("warriorWalkingRight5.png");
-    walkingLeft5 = loadImage("warriorWalkingLeft5.png");
-    walkingRight6 = loadImage("warriorWalkingRight6.png");
-    walkingLeft6 = loadImage("warriorWalkingLeft6.png");
+    idleRight = loadImage("warrior/warriorRight.png");
+    idleLeft = loadImage("warrior/warriorLeft.png");
+    walkingRight1 = loadImage("warrior/warriorWalkingRight1.png");
+    walkingLeft1 = loadImage("warrior/warriorWalkingLeft1.png");
+    walkingRight2 = loadImage("warrior/warriorWalkingRight2.png");
+    walkingLeft2 = loadImage("warrior/warriorWalkingLeft2.png");
+    walkingRight3 = loadImage("warrior/warriorWalkingRight3.png");
+    walkingLeft3 = loadImage("warrior/warriorWalkingLeft3.png");
+    walkingRight5 = loadImage("warrior/warriorWalkingRight5.png");
+    walkingLeft5 = loadImage("warrior/warriorWalkingLeft5.png");
+    walkingRight6 = loadImage("warrior/warriorWalkingRight6.png");
+    walkingLeft6 = loadImage("warrior/warriorWalkingLeft6.png");
   }
 }
