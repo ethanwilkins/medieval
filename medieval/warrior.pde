@@ -3,6 +3,7 @@ class Warrior {
     walkingRight1, walkingLeft1,
     walkingRight2, walkingLeft2,
     walkingRight3, walkingLeft3,
+    walkingRight5, walkingLeft5,
     walkingRight6, walkingLeft6,
     idleWarrior;
   String title, description;
@@ -16,8 +17,8 @@ class Warrior {
   
   void walk() {
     // change step image if distTraveled
-    if (user.distTraveled % 8 == 0) {
-      if (step < 2) {
+    if (user.distTraveled % 10 == 0) {
+      if (step < 5) {
         step++;
       } else step = 0;
     }
@@ -37,6 +38,12 @@ class Warrior {
             user.userImg = walkingRight3;
             break;
           case 3:
+            user.userImg = walkingRight1;
+            break;
+          case 4:
+            user.userImg = walkingRight5;
+            break;
+          case 5:
             user.userImg = walkingRight6;
             break;
         }
@@ -54,6 +61,12 @@ class Warrior {
             user.userImg = walkingLeft3;
             break;
           case 3:
+            user.userImg = walkingLeft1;
+            break;
+          case 4:
+            user.userImg = walkingLeft5;
+            break;
+          case 5:
             user.userImg = walkingLeft6;
             break;
         }
@@ -70,6 +83,8 @@ class Warrior {
     walkingLeft2 = loadImage("warriorWalkingLeft2.png");
     walkingRight3 = loadImage("warriorWalkingRight3.png");
     walkingLeft3 = loadImage("warriorWalkingLeft3.png");
+    walkingRight5 = loadImage("warriorWalkingRight5.png");
+    walkingLeft5 = loadImage("warriorWalkingLeft5.png");
     walkingRight6 = loadImage("warriorWalkingRight6.png");
     walkingLeft6 = loadImage("warriorWalkingLeft6.png");
   }
