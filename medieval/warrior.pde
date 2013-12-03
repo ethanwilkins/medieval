@@ -9,6 +9,7 @@ class Warrior {
     attRight1, attRight2, attRight3;
   String title, description;
   int step, attPose;
+  float attTime;
   
   Warrior () {
     loadWarrior();

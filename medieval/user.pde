@@ -60,7 +60,7 @@ class User {
   void selection() {
     for (int x=0; x < env.characters.size(); x++) {
       Npc npc = env.characters.get(x);
-      if (npc.overNpc()) {
+      if (npc.overNpc() && location.dist(npc.location) < 100) {
         actionState = "attacking";
       }
     }
