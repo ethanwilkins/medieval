@@ -4,41 +4,71 @@ class User {
   Ranger ranger;
   PVector location, speed;
   PImage userImg;
-  float distTraveled;
-  String chosenClass;
+  float destination, distTraveled, health;
+  String actionState, chosenClass;
   
   User () {
     warrior = new Warrior();
     wizard = new Wizard();
     ranger = new Ranger();
     location = new PVector(width/2, 475);
+    actionState = "idle";
     distTraveled = 0;
   }
   
-  void display() {
+  void update() {
+    walk();
+    attack();
     imageMode(CENTER);
     image(userImg, location.x, location.y);
-    walk();
+  }
+  
+  void attack() {
+    if (actionState == "attacking") {
+      if (chosenClass == "warrior") {
+        warrior.attack();
+      } else if (chosenClass == "wizard") {
+        
+      } else if (chosenClass == "wizard") {
+        
+      }
+    }
   }
   
   void walk() {
     // walk animation for class
-    if (chosenClass == "warrior") {
-      warrior.walk();
-    } else if (chosenClass == "wizard") {
-      wizard.walk();
-    } else if (chosenClass == "ranger") {
-      ranger.walk();
+    if (actionState == "walking") {
+      if (chosenClass == "warrior") {
+        warrior.walk();
+      } else if (chosenClass == "wizard") {
+        wizard.walk();
+      } else if (chosenClass == "ranger") {
+        ranger.walk();
+      }
+      // moves user based on mouse/touch
+      if (dist(destination, 0, location.x, 0) > 5) {
+        if (destination > location.x) {
+          location.add(speed);
+        } else if (destination < location.x) {
+          location.sub(speed);
+        } // dist for walk animation
+        distTraveled += speed.x;
+      }
     }
-    // moves user based on mouse/touch
-    if (dist(mouseX, 0, location.x, 0) > 5) {
-      if (mouseX > location.x) {
-        location.add(speed);
-      } else if (mouseX < location.x) {
-        location.sub(speed);
-      } // dist for walk animation
-      distTraveled += speed.x;
+  }
+  
+  void selection() {
+    for (int x=0; x < env.characters.size(); x++) {
+      Npc npc = env.characters.get(x);
+      if (npc.overNpc()) {
+        actionState = "attacking";
+      }
     }
+  }
+  
+  void getDestination() {
+    actionState = "walking";
+    destination = mouseX;
   }
   
   void setUserClass(String classChoice) {

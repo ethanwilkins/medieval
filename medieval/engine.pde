@@ -11,14 +11,22 @@ class Engine {
   void displayGame() {
     // displays all parts of game
     if (gameState == "game") {
-      env.display();
-      que.display();
-      user.display();
+      env.update();
+      user.update();
+    }
+  }
+  
+  void updateUser() {
+    if (gameState == "game") {
+      user.getDestination();
+      user.selection();
     }
   }
   
   void checkButtons() {
-    gui.checkClassChoice();
+    if (gameState == "classChoice") {
+      gui.checkClassChoice();
+    }
   }
   
   void bootStrap() {

@@ -1,14 +1,14 @@
 class Warrior {
   PVector speed;
-  PImage idleRight, idleLeft,
-    walkingRight1, walkingLeft1,
-    walkingRight2, walkingLeft2,
-    walkingRight3, walkingLeft3,
-    walkingRight5, walkingLeft5,
-    walkingRight6, walkingLeft6,
-    idleWarrior;
+  PImage idleWarrior, idleRight, idleLeft,
+    walkRight1, walkLeft1,
+    walkRight2, walkLeft2,
+    walkRight3, walkLeft3,
+    walkRight5, walkLeft5,
+    walkRight6, walkLeft6,
+    attRight1, attRight2, attRight3;
   String title, description;
-  int step;
+  int step, attPose;
   
   Warrior () {
     loadWarrior();
@@ -17,59 +17,80 @@ class Warrior {
     title = "Warrior";
   }
   
+  void attack() {
+    // modulo of millis, cycle through attack poses
+    // start at raising sword at new fight
+    if (millis() % 7 == 0) {
+      if (attPose < 2) {
+        attPose++;
+      } else attPose = 0;
+    }
+    switch (attPose) {
+      case 0:
+        user.userImg = attRight1;
+        break;
+      case 1:
+        user.userImg = attRight2;
+        break;
+      case 2:
+        user.userImg = attRight3;
+        break;
+    }
+  }
+  
   void walk() {
     // change step image if distTraveled
-    if (user.distTraveled % 9 == 0) {
+    if (user.distTraveled % 7 == 0) {
       if (step < 5) {
         step++;
       } else step = 0;
     }
-    if (dist(mouseX, 0, user.location.x, 0) > 5) {
+    if (dist(user.destination, 0, user.location.x, 0) > 5) {
       // warrior walks right
-      if (mouseX > user.location.x) {
+      if (user.destination > user.location.x) {
         idleWarrior = idleRight;
         // only using two steps for now
         switch (step) {
           case 0:
-            user.userImg = walkingRight1;
+            user.userImg = walkRight1;
             break;
           case 1:
-            user.userImg = walkingRight2;
+            user.userImg = walkRight2;
             break;
           case 2:
-            user.userImg = walkingRight3;
+            user.userImg = walkRight3;
             break;
           case 3:
-            user.userImg = walkingRight1;
+            user.userImg = walkRight1;
             break;
           case 4:
-            user.userImg = walkingRight5;
+            user.userImg = walkRight5;
             break;
           case 5:
-            user.userImg = walkingRight6;
+            user.userImg = walkRight6;
             break;
         }
       } // warrior walks left
-      else if (mouseX < user.location.x) {
+      else if (user.destination < user.location.x) {
         idleWarrior = idleLeft;
         switch (step) {
           case 0:
-            user.userImg = walkingLeft1;
+            user.userImg = walkLeft1;
             break;
           case 1:
-            user.userImg = walkingLeft2;
+            user.userImg = walkLeft2;
             break;
           case 2:
-            user.userImg = walkingLeft3;
+            user.userImg = walkLeft3;
             break;
           case 3:
-            user.userImg = walkingLeft1;
+            user.userImg = walkLeft1;
             break;
           case 4:
-            user.userImg = walkingLeft5;
+            user.userImg = walkLeft5;
             break;
           case 5:
-            user.userImg = walkingLeft6;
+            user.userImg = walkLeft6;
             break;
         }
       }
@@ -77,17 +98,20 @@ class Warrior {
   }
   
   void loadWarrior() {
-    idleRight = loadImage("warrior/warriorRight.png");
-    idleLeft = loadImage("warrior/warriorLeft.png");
-    walkingRight1 = loadImage("warrior/warriorWalkingRight1.png");
-    walkingLeft1 = loadImage("warrior/warriorWalkingLeft1.png");
-    walkingRight2 = loadImage("warrior/warriorWalkingRight2.png");
-    walkingLeft2 = loadImage("warrior/warriorWalkingLeft2.png");
-    walkingRight3 = loadImage("warrior/warriorWalkingRight3.png");
-    walkingLeft3 = loadImage("warrior/warriorWalkingLeft3.png");
-    walkingRight5 = loadImage("warrior/warriorWalkingRight5.png");
-    walkingLeft5 = loadImage("warrior/warriorWalkingLeft5.png");
-    walkingRight6 = loadImage("warrior/warriorWalkingRight6.png");
-    walkingLeft6 = loadImage("warrior/warriorWalkingLeft6.png");
+    idleRight = loadImage("warrior/idleRight.png");
+    idleLeft = loadImage("warrior/idleLeft.png");
+    walkRight1 = loadImage("warrior/walkRight1.png");
+    walkLeft1 = loadImage("warrior/walkLeft1.png");
+    walkRight2 = loadImage("warrior/walkRight2.png");
+    walkLeft2 = loadImage("warrior/walkLeft2.png");
+    walkRight3 = loadImage("warrior/walkRight3.png");
+    walkLeft3 = loadImage("warrior/walkLeft3.png");
+    walkRight5 = loadImage("warrior/walkRight5.png");
+    walkLeft5 = loadImage("warrior/walkLeft5.png");
+    walkRight6 = loadImage("warrior/walkRight6.png");
+    walkLeft6 = loadImage("warrior/walkLeft6.png");
+    attRight1 = loadImage("warrior/attRight1.png");
+    attRight2 = loadImage("warrior/attRight2.png");
+    attRight3 = loadImage("warrior/attRight3.png");
   }
 }

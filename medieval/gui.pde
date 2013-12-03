@@ -51,23 +51,47 @@ class Gui {
   
   void checkClassChoice() {
     // check character buttons
-    if (ei.gameState == "classChoice") {
-      if (warrior.overButton() && choiceState == 0) {
-        user.setUserClass("warrior");
-      } else if (wizard.overButton() && choiceState == 1) {
-        user.setUserClass("wizard");
-      } else if (ranger.overButton() && choiceState == 2) {
-        user.setUserClass("ranger");
-      } // check back/forward
-      else if (forward.overButton()) {
-        if (choiceState < 2) {
-          choiceState++;
-        } else choiceState = 0;
-      } else if (backward.overButton()) {
-        if (choiceState > 0) {
-          choiceState--;
-        } else choiceState = 2;
-      }
+    if (warrior.overButton() && choiceState == 0) {
+      user.setUserClass("warrior");
+    } else if (wizard.overButton() && choiceState == 1) {
+      user.setUserClass("wizard");
+    } else if (ranger.overButton() && choiceState == 2) {
+      user.setUserClass("ranger");
+    } // check back/forward
+    else if (forward.overButton()) {
+      if (choiceState < 2) {
+        choiceState++;
+      } else choiceState = 0;
+    } else if (backward.overButton()) {
+      if (choiceState > 0) {
+        choiceState--;
+      } else choiceState = 2;
     }
+  }
+}
+
+class Button {
+  PImage graphic;
+  float x, y, w, h;
+  
+  Button (float xLoc, float yLoc, PImage buttonGraphic) {
+    graphic = buttonGraphic;
+    w = graphic.width;
+    h = graphic.height;
+    x = xLoc;
+    y = yLoc;
+  }
+  
+  void display() {
+    imageMode(CENTER);
+    image(graphic, x, y);
+  }
+  
+  boolean overButton() {
+    float disX = x - mouseX;
+    float disY = y - mouseY;
+    if(sqrt(sq(disX) + sq(disY)) < w/2) {
+      return true;
+    } else return false;
   }
 }

@@ -17,5 +17,9 @@ void draw() {
 }
 
 void mousePressed() {
+  ei.updateUser();
+}
+
+void mouseReleased() {
   ei.checkButtons();
 }
