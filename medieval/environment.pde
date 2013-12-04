@@ -9,6 +9,7 @@ class Environment {
   Environment () {
     background = loadImage("background.png");
     characters = new ArrayList<Npc>();
+    enemies = new ArrayList<Npc>();
     questGiver = new Npc(width*0.9, 475, loadImage("questGiverLeft.png"));
     characters.add(questGiver);
   }

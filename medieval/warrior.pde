@@ -8,8 +8,7 @@ class Warrior {
     walkRight6, walkLeft6,
     attRight1, attRight2, attRight3;
   String title, description;
-  int step, attPose;
-  float attTime;
+  int step, attPose, attFrames;
   
   Warrior () {
     loadWarrior();
@@ -19,9 +18,9 @@ class Warrior {
   }
   
   void attack() {
-    // modulo of millis, cycle through attack poses
     // start at raising sword at new fight
-    if (millis() % 7 == 0) {
+    attFrames++;
+    if (attFrames % 7 == 0) {
       if (attPose < 2) {
         attPose++;
       } else attPose = 0;

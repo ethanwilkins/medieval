@@ -60,7 +60,7 @@ class User {
   void selection() {
     for (int x=0; x < env.characters.size(); x++) {
       Npc npc = env.characters.get(x);
-      if (npc.overNpc() && location.dist(npc.location) < 100) {
+      if (npc.overNpc() && location.dist(npc.location) < 200) {
         actionState = "attacking";
       }
     }
@@ -73,6 +73,7 @@ class User {
   
   void setUserClass(String classChoice) {
     // will set the users class and corresponding variables
+    // should initialize character class here, idle image copies  in gui
     if (classChoice == "warrior") {
       chosenClass = "warrior";
       userImg = warrior.idleRight;
