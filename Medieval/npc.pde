@@ -4,16 +4,29 @@ class Npc {
   boolean alive, enemy;
   float w, h, health;
   
-  Npc (float x_, float y_, PImage img) {
+  Npc (float x, float y, PImage img) {
+    location = new PVector(x, y);
     npcImg = img;
-    location = new PVector(x_, y_);
+    alive = true;
     w = npcImg.width;
     h = npcImg.height;
+    health = 1000;
   }
   
   void update() {
-    imageMode(CENTER);
-    image(npcImg, location.x, location.y);
+    if (alive) {
+      imageMode(CENTER);
+      image(npcImg, location.x, location.y);
+      death();
+    }
+  }
+  
+  void death() {
+    if (health < 1) {
+      alive = false;
+      env.enemies.remove(this);
+      env.characters.remove(this);
+    }
   }
   
   boolean overNpc() {

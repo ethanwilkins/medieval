@@ -19,6 +19,7 @@ class Engine {
   void updateUser() {
     if (gameState == "game") {
       user.getDestination();
+      // selection aftwerwards to override
       user.selection();
     }
   }

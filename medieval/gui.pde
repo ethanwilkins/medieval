@@ -72,24 +72,24 @@ class Gui {
 
 class Button {
   PImage graphic;
-  float x, y, w, h;
+  PVector loc;
+  float w, h;
   
-  Button (float xLoc, float yLoc, PImage buttonGraphic) {
+  Button (float x, float y, PImage buttonGraphic) {
+    loc = new PVector(x, y);
     graphic = buttonGraphic;
     w = graphic.width;
     h = graphic.height;
-    x = xLoc;
-    y = yLoc;
   }
   
   void display() {
     imageMode(CENTER);
-    image(graphic, x, y);
+    image(graphic, loc.x, loc.y);
   }
   
   boolean overButton() {
-    float disX = x - mouseX;
-    float disY = y - mouseY;
+    float disX = loc.x - mouseX;
+    float disY = loc.y - mouseY;
     if(sqrt(sq(disX) + sq(disY)) < w/2) {
       return true;
     } else return false;

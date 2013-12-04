@@ -2,6 +2,7 @@ class User {
   Warrior warrior;
   Wizard wizard;
   Ranger ranger;
+  Npc target;
   PVector location, speed;
   PImage userImg;
   float destination, distTraveled, health;
@@ -14,6 +15,7 @@ class User {
     location = new PVector(width/2, 475);
     actionState = "idle";
     distTraveled = 0;
+    health = 1000;
   }
   
   void update() {
@@ -26,6 +28,7 @@ class User {
   void attack() {
     if (actionState == "attacking") {
       if (chosenClass == "warrior") {
+        warrior.attackDisplay();
         warrior.attack();
       } else if (chosenClass == "wizard") {
         
@@ -60,8 +63,11 @@ class User {
   void selection() {
     for (int x=0; x < env.characters.size(); x++) {
       Npc npc = env.characters.get(x);
-      if (npc.overNpc() && location.dist(npc.location) < 200) {
-        actionState = "attacking";
+      if (npc.overNpc() && npc.alive) {
+        target = npc;
+        if (chosenClass == "warrior") {
+          warrior.selection(npc);
+        }
       }
     }
   }
@@ -73,7 +79,6 @@ class User {
   
   void setUserClass(String classChoice) {
     // will set the users class and corresponding variables
-    // should initialize character class here, idle image copies  in gui
     if (classChoice == "warrior") {
       chosenClass = "warrior";
       userImg = warrior.idleRight;

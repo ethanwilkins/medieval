@@ -1,3 +1,5 @@
+// double tap and more taps for rapid, successive shots
+
 class Ranger {
   String title, description;
   

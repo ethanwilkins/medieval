@@ -1,3 +1,5 @@
+// long press and release for attacks, multiple target spells
+
 class Wizard {
   String title, description;
   

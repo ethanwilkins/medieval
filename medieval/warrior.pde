@@ -1,3 +1,6 @@
+// different swipes and swipe combos for attacks
+// maxHit 
+
 class Warrior {
   PVector speed;
   PImage idleWarrior, idleRight, idleLeft,
@@ -9,15 +12,34 @@ class Warrior {
     attRight1, attRight2, attRight3;
   String title, description;
   int step, attPose, attFrames;
+  float maxHit, maxHealth;
   
   Warrior () {
     loadWarrior();
     speed = new PVector(2.5, 0);
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
+    maxHit = 200;
+  }
+  
+  void selection(Npc npc) {
+    if (user.location.dist(npc.location) < 200) {
+      // if npc is enemy, attack, else "talking"
+      user.actionState = "attacking";
+    } //else user.actionState = "targeting";
+  }
+  
+  void target() {
+    // walk towards the selected target and attack if enemy
   }
   
   void attack() {
+    if (attFrames % 7 == 0 && attPose == 0) {
+      user.target.health -= random(1, maxHit);
+    }
+  }
+  
+  void attackDisplay() {
     // start at raising sword at new fight
     attFrames++;
     if (attFrames % 7 == 0) {
