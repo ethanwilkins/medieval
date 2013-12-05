@@ -1,6 +1,6 @@
 class Gui {
   Button warrior, wizard, ranger, forward, backward;
-  // keeps the state of the class choice and possibly later choices
+  String guiState;
   int choiceState;
   
   Gui () {

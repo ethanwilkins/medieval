@@ -3,6 +3,7 @@ class Npc {
   PVector location;
   boolean alive, enemy;
   float w, h, health;
+  String actionState;
   
   Npc (float x, float y, PImage img) {
     location = new PVector(x, y);

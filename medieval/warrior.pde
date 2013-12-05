@@ -1,5 +1,5 @@
-// different swipes and swipe combos for attacks
-// maxHit 
+// different swipes and swipe combos for attacks, swipe up for sword impale
+// maxHit dependent on level
 
 class Warrior {
   PVector speed;
@@ -11,7 +11,7 @@ class Warrior {
     walkRight6, walkLeft6,
     attRight1, attRight2, attRight3;
   String title, description;
-  int step, attPose, attFrames;
+  int step, attPose, attFrames, range;
   float maxHit, maxHealth;
   
   Warrior () {
@@ -20,17 +20,26 @@ class Warrior {
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
     maxHit = 200;
+    range = 150;
   }
   
-  void selection(Npc npc) {
-    if (user.location.dist(npc.location) < 200) {
+  void selection() {
+    if (user.location.dist(user.target.location) < range) {
       // if npc is enemy, attack, else "talking"
       user.actionState = "attacking";
-    } //else user.actionState = "targeting";
+    } else user.actionState = "targeting";
   }
   
   void target() {
     // walk towards the selected target and attack if enemy
+    if (user.actionState == "targeting") {
+      if (user.location.dist(user.target.location) > range) {
+        user.destination.set(user.target.location);
+      } else user.actionState = "attacking";
+      if (!user.target.alive) {
+        user.actionState = "walking";
+      }
+    }
   }
   
   void attack() {
@@ -67,9 +76,9 @@ class Warrior {
         step++;
       } else step = 0;
     }
-    if (dist(user.destination, 0, user.location.x, 0) > 5) {
+    if (user.location.dist(user.destination) > 5) {
       // warrior walks right
-      if (user.destination > user.location.x) {
+      if (user.destination.x > user.location.x) {
         idleWarrior = idleRight;
         // only using two steps for now
         switch (step) {
@@ -93,7 +102,7 @@ class Warrior {
             break;
         }
       } // warrior walks left
-      else if (user.destination < user.location.x) {
+      else if (user.destination.x < user.location.x) {
         idleWarrior = idleLeft;
         switch (step) {
           case 0:

@@ -3,9 +3,9 @@ class User {
   Wizard wizard;
   Ranger ranger;
   Npc target;
-  PVector location, speed;
+  PVector location, destination, speed;
   PImage userImg;
-  float destination, distTraveled, health;
+  float distTraveled, health;
   String actionState, chosenClass;
   
   User () {
@@ -13,6 +13,7 @@ class User {
     wizard = new Wizard();
     ranger = new Ranger();
     location = new PVector(width/2, 475);
+    destination = new PVector();
     actionState = "idle";
     distTraveled = 0;
     health = 1000;
@@ -40,8 +41,9 @@ class User {
   
   void walk() {
     // walk animation for class
-    if (actionState == "walking") {
+    if (actionState == "walking" || actionState == "targeting") {
       if (chosenClass == "warrior") {
+        warrior.target();
         warrior.walk();
       } else if (chosenClass == "wizard") {
         wizard.walk();
@@ -49,15 +51,19 @@ class User {
         ranger.walk();
       }
       // moves user based on mouse/touch
-      if (dist(destination, 0, location.x, 0) > 5) {
-        if (destination > location.x) {
+      if (location.dist(destination) > 5) {
+        if (destination.x > location.x) {
           location.add(speed);
-        } else if (destination < location.x) {
+        } else if (destination.x < location.x) {
           location.sub(speed);
         } // dist for walk animation
         distTraveled += speed.x;
-      }
+      } else actionState = "idle";
     }
+  }
+  
+  void detectSwipe() {
+    
   }
   
   void selection() {
@@ -66,7 +72,11 @@ class User {
       if (npc.overNpc() && npc.alive) {
         target = npc;
         if (chosenClass == "warrior") {
-          warrior.selection(npc);
+          warrior.selection();
+        } else if (chosenClass == "wizard") {
+          
+        } else if (chosenClass == "ranger") {
+          
         }
       }
     }
@@ -74,7 +84,8 @@ class User {
   
   void getDestination() {
     actionState = "walking";
-    destination = mouseX;
+    destination.x = mouseX;
+    destination.y = location.y;
   }
   
   void setUserClass(String classChoice) {
