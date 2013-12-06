@@ -1,4 +1,5 @@
 // different swipes and swipe combos for attacks, swipe up for sword impale
+// tap on enemy, walk up and attack once, one attack per tap
 // maxHit dependent on level
 
 class Warrior {
@@ -11,8 +12,8 @@ class Warrior {
     walkRight6, walkLeft6,
     attRight1, attRight2, attRight3;
   String title, description;
-  int step, attPose, attFrames, range;
-  float maxHit, maxHealth;
+  int step, attPose, attFrames, attSpeed;
+  float maxHit, maxHealth, range;
   
   Warrior () {
     loadWarrior();
@@ -21,37 +22,21 @@ class Warrior {
     title = "Warrior";
     maxHit = 200;
     range = 150;
-  }
-  
-  void selection() {
-    if (user.location.dist(user.target.location) < range) {
-      // if npc is enemy, attack, else "talking"
-      user.actionState = "attacking";
-    } else user.actionState = "targeting";
-  }
-  
-  void target() {
-    // walk towards the selected target and attack if enemy
-    if (user.actionState == "targeting") {
-      if (user.location.dist(user.target.location) > range) {
-        user.destination.set(user.target.location);
-      } else user.actionState = "attacking";
-      if (!user.target.alive) {
-        user.actionState = "walking";
-      }
-    }
+    attSpeed = 9;
   }
   
   void attack() {
-    if (attFrames % 7 == 0 && attPose == 0) {
-      user.target.health -= random(1, maxHit);
+    float damageDealt;
+    if (attFrames % attSpeed == 0 && attPose == 0) {
+      damageDealt = random(1, maxHit);
+      user.target.health -= damageDealt;
     }
   }
   
   void attackDisplay() {
     // start at raising sword at new fight
     attFrames++;
-    if (attFrames % 7 == 0) {
+    if (attFrames % attSpeed == 0) {
       if (attPose < 2) {
         attPose++;
       } else attPose = 0;
@@ -65,6 +50,9 @@ class Warrior {
         break;
       case 2:
         user.userImg = attRight3;
+        break;
+      case 3:
+        user.userImg = attRight1;
         break;
     }
   }
@@ -126,6 +114,28 @@ class Warrior {
         }
       }
     } else user.userImg = idleWarrior;
+  }
+  
+  void target() {
+    if (user.actionState == "targeting") {
+      if (user.location.dist(user.target.location) > range) {
+        user.destination.set(user.target.location);
+      } // when user is in range of target
+      else user.actionState = "attacking";
+    } // if user kills target, user stops attacking and idles
+    if (user.actionState == "attacking" && !user.target.alive) {
+      // so user doesn't walk over body
+      user.destination.set(user.location);
+      // enable to load idle image
+      user.actionState = "walking";
+    }
+  }
+  
+  void selection() {
+    if (user.location.dist(user.target.location) < range) {
+      // if npc is enemy, attack, else "talking"
+      user.actionState = "attacking";
+    } else user.actionState = "targeting";
   }
   
   void loadWarrior() {

@@ -1,12 +1,15 @@
+// pausing game lets you change spells and weapons
+
 class User {
   Warrior warrior;
   Wizard wizard;
   Ranger ranger;
   Npc target;
-  PVector location, destination, speed;
   PImage userImg;
-  float distTraveled, health;
+  PVector location, destination, speed;
   String actionState, chosenClass;
+  float distTraveled, health;
+  int xp;
   
   User () {
     warrior = new Warrior();
@@ -21,6 +24,7 @@ class User {
   
   void update() {
     walk();
+    target();
     attack();
     imageMode(CENTER);
     image(userImg, location.x, location.y);
@@ -43,7 +47,6 @@ class User {
     // walk animation for class
     if (actionState == "walking" || actionState == "targeting") {
       if (chosenClass == "warrior") {
-        warrior.target();
         warrior.walk();
       } else if (chosenClass == "wizard") {
         wizard.walk();
@@ -59,6 +62,16 @@ class User {
         } // dist for walk animation
         distTraveled += speed.x;
       } else actionState = "idle";
+    }
+  }
+  
+  void target() {
+    if (chosenClass == "warrior") {
+      warrior.target();
+    } else if (chosenClass == "wizard") {
+      
+    } else if (chosenClass == "wizard") {
+      
     }
   }
   

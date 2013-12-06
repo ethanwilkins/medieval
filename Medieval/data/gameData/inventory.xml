@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inventory>
+	<weapons>
+		<weapon amount="1">Sword</weapon>
+		<weapon amount="1">Staff</weapon>
+		<weapon amount="1">Bow</weapon>
+		<weapon amount="50">Arrow</weapon>
+	</weapons>
+	<loot>
+		<item amount="0">Gold</item>
+		<item amount="0">Sapphire</item>
+		<item amount="0">Emerald</item>
+		<item amount="0">Ruby</item>
+	</loot>
+</inventory>

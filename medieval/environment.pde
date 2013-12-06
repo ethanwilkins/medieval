@@ -1,4 +1,5 @@
 // Environment holds all backgrounds and environmental objects i.e. loot, npc's
+// spawn different enemies at different levels
 
 class Environment {
   PImage background;
