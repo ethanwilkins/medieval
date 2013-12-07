@@ -17,7 +17,7 @@ void draw() {
 }
 
 void mousePressed() {
-  ei.updateUser();
+  ei.updateUserPress();
 }
 
 void mouseReleased() {

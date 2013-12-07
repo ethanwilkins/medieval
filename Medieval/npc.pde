@@ -2,7 +2,8 @@ class Npc {
   PImage npcImg;
   PVector location;
   boolean alive, enemy;
-  float w, h, health;
+  float w, h, health,
+    timeOfDeath;
   String actionState;
   
   Npc (float x, float y, PImage img) {
@@ -25,8 +26,9 @@ class Npc {
   void death() {
     if (health < 1) {
       alive = false;
-      env.enemies.remove(this);
-      env.characters.remove(this);
+//      env.enemies.remove(this);
+//      env.characters.remove(this);
+      timeOfDeath = millis();
     }
   }
   

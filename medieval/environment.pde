@@ -22,5 +22,14 @@ class Environment {
       Npc npc = characters.get(x);
       npc.update();
     }
+    respawn();
+  }
+  
+  void respawn() {
+    // temporary test respawn
+    if (!questGiver.alive && questGiver.timeOfDeath < millis()-5000) {
+      questGiver.health = 1000;
+      questGiver.alive = true;
+    }
   }
 }

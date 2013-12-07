@@ -16,11 +16,11 @@ class Engine {
     }
   }
   
-  void updateUser() {
+  void updateUserPress() {
     if (gameState == "game") {
       user.getDestination();
       // selection aftwerwards to override
-      user.selection();
+      user.detectTap();
     }
   }
   

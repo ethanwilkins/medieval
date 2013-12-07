@@ -75,7 +75,15 @@ class User {
     }
   }
   
+  void detectTap() {
+    selection();
+  }
+  
   void detectSwipe() {
+    
+  }
+  
+  void detectLongPress() {
     
   }
   

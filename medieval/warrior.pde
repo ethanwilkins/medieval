@@ -1,5 +1,6 @@
 // different swipes and swipe combos for attacks, swipe up for sword impale
 // tap on enemy, walk up and attack once, one attack per tap
+// different speeds for different parts of attack
 // maxHit dependent on level
 
 class Warrior {
@@ -22,14 +23,18 @@ class Warrior {
     title = "Warrior";
     maxHit = 200;
     range = 150;
-    attSpeed = 9;
+    attSpeed = 7;
   }
   
   void attack() {
     float damageDealt;
-    if (attFrames % attSpeed == 0 && attPose == 0) {
+    if (attFrames % attSpeed == 0 && attPose == 3) {
       damageDealt = random(1, maxHit);
       user.target.health -= damageDealt;
+      // so user doesn't walk over enemy
+      user.destination.set(user.location);
+      // enable to load idle image
+      user.actionState = "walking";
     }
   }
   
@@ -37,7 +42,7 @@ class Warrior {
     // start at raising sword at new fight
     attFrames++;
     if (attFrames % attSpeed == 0) {
-      if (attPose < 2) {
+      if (attPose < 3) {
         attPose++;
       } else attPose = 0;
     }
