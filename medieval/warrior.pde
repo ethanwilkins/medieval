@@ -21,28 +21,51 @@ class Warrior {
     speed = new PVector(2.5, 0);
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
-    maxHit = 200;
+    maxHit = 300;
     range = 150;
-    attSpeed = 7;
+    attSpeed = 9;
   }
   
-  void attack() {
+  void quickAttack() {
     float damageDealt;
-    if (attFrames % attSpeed == 0 && attPose == 3) {
+    if (attFrames % attSpeed == 0 && attPose == 4) {
       damageDealt = random(1, maxHit);
       user.target.health -= damageDealt;
       // so user doesn't walk over enemy
-      user.destination.set(user.location);
+      user.destination.set(user.loc);
       // enable to load idle image
       user.actionState = "walking";
     }
   }
   
-  void attackDisplay() {
+  void target() {
+    if (user.actionState == "targeting") {
+      if (user.loc.dist(user.target.loc) > range) {
+        user.destination.set(user.target.loc);
+      } // when user is in range of target
+      else user.actionState = "attacking";
+    } // if user kills target, user stops attacking and idles
+    if (user.actionState == "attacking" && user.target.actionState == "dead") {
+      // so user doesn't walk over body
+      user.destination.set(user.loc);
+      // enable to load idle image
+      user.actionState = "walking";
+    }
+  }
+  
+  void selection() {
+    if (user.loc.dist(user.target.loc) < range) {
+      // if npc is enemy, attack, else "talking"
+      user.actionState = "attacking";
+    } else user.actionState = "targeting";
+  }
+  
+  void displayQuickAttack() {
     // start at raising sword at new fight
+    // cycles through attack poses as frames pass
     attFrames++;
     if (attFrames % attSpeed == 0) {
-      if (attPose < 3) {
+      if (attPose < 4) {
         attPose++;
       } else attPose = 0;
     }
@@ -57,6 +80,9 @@ class Warrior {
         user.userImg = attRight3;
         break;
       case 3:
+        user.userImg = attRight2;
+        break;
+      case 4:
         user.userImg = attRight1;
         break;
     }
@@ -69,9 +95,9 @@ class Warrior {
         step++;
       } else step = 0;
     }
-    if (user.location.dist(user.destination) > 5) {
+    if (user.loc.dist(user.destination) > 5) {
       // warrior walks right
-      if (user.destination.x > user.location.x) {
+      if (user.destination.x > user.loc.x) {
         idleWarrior = idleRight;
         // only using two steps for now
         switch (step) {
@@ -95,7 +121,7 @@ class Warrior {
             break;
         }
       } // warrior walks left
-      else if (user.destination.x < user.location.x) {
+      else if (user.destination.x < user.loc.x) {
         idleWarrior = idleLeft;
         switch (step) {
           case 0:
@@ -119,28 +145,6 @@ class Warrior {
         }
       }
     } else user.userImg = idleWarrior;
-  }
-  
-  void target() {
-    if (user.actionState == "targeting") {
-      if (user.location.dist(user.target.location) > range) {
-        user.destination.set(user.target.location);
-      } // when user is in range of target
-      else user.actionState = "attacking";
-    } // if user kills target, user stops attacking and idles
-    if (user.actionState == "attacking" && !user.target.alive) {
-      // so user doesn't walk over body
-      user.destination.set(user.location);
-      // enable to load idle image
-      user.actionState = "walking";
-    }
-  }
-  
-  void selection() {
-    if (user.location.dist(user.target.location) < range) {
-      // if npc is enemy, attack, else "talking"
-      user.actionState = "attacking";
-    } else user.actionState = "targeting";
   }
   
   void loadWarrior() {

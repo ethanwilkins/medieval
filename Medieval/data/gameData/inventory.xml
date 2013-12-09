@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inventory>
-	<weapons>
-		<weapon amount="1">Sword</weapon>
-		<weapon amount="1">Staff</weapon>
-		<weapon amount="1">Bow</weapon>
-		<weapon amount="50">Arrow</weapon>
-	</weapons>
+	<user>
+		<item quantity="0">Gold</item>
+	</user>
+	<warrior>
+		<weapon quantity="1">Sword</weapon>
+		<item quantity="1">Ale</item>
+	</warrior>
+	<wizard>
+		<weapon quantity="1">Staff</weapon>
+		<item quantity="2">Mana</item>
+	</wizard>
+	<ranger>
+		<weapon quantity="1">Bow</weapon>
+		<weapon quantity="50">Arrow</weapon>
+	</ranger>
 	<loot>
-		<item amount="0">Gold</item>
-		<item amount="0">Sapphire</item>
-		<item amount="0">Emerald</item>
-		<item amount="0">Ruby</item>
+		<gold quantity="2">Gold</gold>
+		<item quantity="0">Sapphire</item>
+		<item quantity="0">Emerald</item>
+		<item quantity="0">Ruby</item>
 	</loot>
 </inventory>

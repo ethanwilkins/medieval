@@ -6,7 +6,8 @@ class User {
   Ranger ranger;
   Npc target;
   PImage userImg;
-  PVector location, destination, speed;
+  ArrayList<Item> bag;
+  PVector loc, destination, speed;
   String actionState, chosenClass;
   float distTraveled, health;
   int xp;
@@ -15,7 +16,8 @@ class User {
     warrior = new Warrior();
     wizard = new Wizard();
     ranger = new Ranger();
-    location = new PVector(width/2, 475);
+    bag = new ArrayList<Item>();
+    loc = new PVector(width/2, 475);
     destination = new PVector();
     actionState = "idle";
     distTraveled = 0;
@@ -27,14 +29,14 @@ class User {
     target();
     attack();
     imageMode(CENTER);
-    image(userImg, location.x, location.y);
+    image(userImg, loc.x, loc.y);
   }
   
   void attack() {
     if (actionState == "attacking") {
       if (chosenClass == "warrior") {
-        warrior.attackDisplay();
-        warrior.attack();
+        warrior.displayQuickAttack();
+        warrior.quickAttack();
       } else if (chosenClass == "wizard") {
         
       } else if (chosenClass == "wizard") {
@@ -54,11 +56,11 @@ class User {
         ranger.walk();
       }
       // moves user based on mouse/touch
-      if (location.dist(destination) > 5) {
-        if (destination.x > location.x) {
-          location.add(speed);
-        } else if (destination.x < location.x) {
-          location.sub(speed);
+      if (loc.dist(destination) > 5) {
+        if (destination.x > loc.x) {
+          loc.add(speed);
+        } else if (destination.x < loc.x) {
+          loc.sub(speed);
         } // dist for walk animation
         distTraveled += speed.x;
       } else actionState = "idle";
@@ -75,22 +77,10 @@ class User {
     }
   }
   
-  void detectTap() {
-    selection();
-  }
-  
-  void detectSwipe() {
-    
-  }
-  
-  void detectLongPress() {
-    
-  }
-  
   void selection() {
     for (int x=0; x < env.characters.size(); x++) {
       Npc npc = env.characters.get(x);
-      if (npc.overNpc() && npc.alive) {
+      if (npc.overNpc() && npc.actionState != "dead") {
         target = npc;
         if (chosenClass == "warrior") {
           warrior.selection();
@@ -103,10 +93,20 @@ class User {
     }
   }
   
+  void loot() {
+    for (int x=0; x < env.loot.size(); x++) {
+      Item item = env.loot.get(x);
+      if (item.overItem()) {
+        bag.add(item);
+        env.loot.remove(item);
+      }
+    }
+  }
+  
   void getDestination() {
     actionState = "walking";
     destination.x = mouseX;
-    destination.y = location.y;
+    destination.y = loc.y;
   }
   
   void setUserClass(String classChoice) {
