@@ -2,27 +2,35 @@ class Item {
   PVector loc;
   PImage itemImg;
   XML element;
-  String name;
+  String name, path;
   int quantity;
   float w, h;
   
   Item (float x, float y, PImage img, String itemPath) {
     loc = new PVector(x, y);
     itemImg = img;
-    loadItem(itemPath);
+    path = itemPath;
+    loadItem(path);
     w = itemImg.width;
     h = itemImg.height;
   }
   
-  void update() {
+  void display() {
     imageMode(CENTER);
     image(itemImg, loc.x, loc.y);
+    // show quantity of multiples
+    if (quantity > 1) {
+      fill(255);
+      textSize(20);
+      textAlign(CENTER);
+      text(quantity, loc.x-20, loc.y-20);
+    }
   }
   
   void loadItem(String itemPath) {
     element = ei.inventory.getChild(itemPath);
     quantity = element.getInt("quantity");
-    name = element.getContent();
+    name = element.getString("name");
   }
   
   boolean overItem() {

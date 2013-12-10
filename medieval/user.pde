@@ -1,4 +1,6 @@
 // pausing game lets you change spells and weapons
+// you cant really transfer items between bags, you'll have to copy them
+// get properties from item to give to constructor of new copy item
 
 class User {
   Warrior warrior;
@@ -6,7 +8,7 @@ class User {
   Ranger ranger;
   Npc target;
   PImage userImg;
-  ArrayList<Item> bag;
+  ArrayList<Item> bag; Item gold;
   PVector loc, destination, speed;
   String actionState, chosenClass;
   float distTraveled, health;
@@ -22,6 +24,7 @@ class User {
     actionState = "idle";
     distTraveled = 0;
     health = 1000;
+    loadBag();
   }
   
   void update() {
@@ -97,7 +100,13 @@ class User {
     for (int x=0; x < env.loot.size(); x++) {
       Item item = env.loot.get(x);
       if (item.overItem()) {
-        bag.add(item);
+        if (item.name == gold.name) {
+          gold.quantity += item.quantity;
+        } else {
+          // unable to transfer, make copy instead
+          bag.add(new Item(loc.x, loc.y,
+          item.itemImg, item.path));
+        }
         env.loot.remove(item);
       }
     }
@@ -107,6 +116,12 @@ class User {
     actionState = "walking";
     destination.x = mouseX;
     destination.y = loc.y;
+  }
+  
+  void loadBag() {
+    gold = new Item(loc.x, loc.y,
+      loadImage("goldCoins.png"), "user/gold");
+    bag.add(gold);
   }
   
   void setUserClass(String classChoice) {

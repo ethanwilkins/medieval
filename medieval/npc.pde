@@ -10,12 +10,11 @@ class Npc {
     npcImg = img;
     loc = new PVector(x, y);
     bag = new ArrayList<Item>();
-    gold = new Item(loc.x, loc.y+150, loadImage("goldCoins.png"), "loot/gold");
-    bag.add(gold);
     actionState = "idle";
     w = npcImg.width;
     h = npcImg.height;
     health = 500;
+    loadBag();
   }
   
   void update() {
@@ -26,12 +25,18 @@ class Npc {
     }
   }
   
+  void loadBag() {
+    gold = new Item(loc.x, loc.y+150,
+      loadImage("goldCoins.png"), "loot/gold");
+    bag.add(gold);
+  }
+  
   void death() {
     if (health < 1) {
       actionState = "dead";
       timeOfDeath = millis();
-      bag.remove(gold);
       env.loot.add(gold);
+      bag.remove(gold);
     }
   }
   

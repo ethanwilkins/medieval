@@ -19,9 +19,11 @@ class Engine {
   
   void displayGui() {
     if (gameState == "classChoice") {
-      gui.classChoice();
+      gui.displayClassChoice();
     } else if (gameState == "game") {
-      gui.pauseButton();
+      gui.pause.display();
+    } else if (gameState == "paused") {
+      gui.displayPauseScreen();
     }
   }
   
@@ -51,6 +53,8 @@ class Engine {
       gui.checkClassChoice();
     } else if (gameState == "game") {
       gui.checkPauseButton();
+    } else if (gameState == "paused") {
+      gui.checkPauseScreen();
     }
   }
   

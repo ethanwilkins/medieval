@@ -21,7 +21,7 @@ class Warrior {
     speed = new PVector(2.5, 0);
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
-    maxHit = 300;
+    maxHit = 500;
     range = 150;
     attSpeed = 9;
   }

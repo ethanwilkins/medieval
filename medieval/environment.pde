@@ -30,7 +30,7 @@ class Environment {
   
   void displayItems() {
     for (int x=0; x < loot.size(); x++) {
-      loot.get(x).update();
+      loot.get(x).display();
     }
   }
   
@@ -44,8 +44,12 @@ class Environment {
     for (int x=0; x < characters.size(); x++) {
       Npc npc = characters.get(x);
       if (npc.actionState == "dead" && npc.timeOfDeath < millis()-5000) {
-        npc.actionState = "idle";
-        npc.health = 1000;
+        if (npc == questGiver) {
+          questGiver = new Npc(width*0.9, 475, loadImage("questGiverLeft.png"));
+        } else {
+          npc.actionState = "idle";
+          npc.health = 1000;
+        }
       }
     }
   }
