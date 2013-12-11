@@ -5,7 +5,7 @@ User user;
 Gui gui;
 
 void setup() {
-  size(displayWidth, displayHeight);
+  size(1280, 720);
   orientation(LANDSCAPE);
   ei = new Engine();
   ei.bootStrap();

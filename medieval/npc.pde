@@ -5,6 +5,7 @@ class Npc {
   float w, h, health,
     timeOfDeath;
   String actionState;
+  int level;
   
   Npc (float x, float y, PImage img) {
     npcImg = img;
@@ -14,6 +15,7 @@ class Npc {
     w = npcImg.width;
     h = npcImg.height;
     health = 500;
+    level = 1;
     loadBag();
   }
   

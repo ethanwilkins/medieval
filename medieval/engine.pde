@@ -1,4 +1,5 @@
 // Engine class ties the game together, interfacing all the classes to the main file, medieval
+// read xml in bootstrap to setup game based on last save
 
 class Engine {
   XML inventory, stats, text;

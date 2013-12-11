@@ -12,16 +12,17 @@ class User {
   PVector loc, destination, speed;
   String actionState, chosenClass;
   float distTraveled, health;
-  int xp;
+  int xp, kills, level;
   
   User () {
     warrior = new Warrior();
     wizard = new Wizard();
     ranger = new Ranger();
     bag = new ArrayList<Item>();
-    loc = new PVector(width/2, 475);
+    loc = new PVector(200, 475);
     destination = new PVector();
     actionState = "idle";
+    xp = kills = level = 0;
     distTraveled = 0;
     health = 1000;
     loadBag();
@@ -113,9 +114,12 @@ class User {
   }
   
   void getDestination() {
-    actionState = "walking";
-    destination.x = mouseX;
-    destination.y = loc.y;
+    // if pause/resume not pressed
+    if (mouseY > 200) {
+      actionState = "walking";
+      destination.x = mouseX;
+      destination.y = loc.y;
+    }
   }
   
   void loadBag() {

@@ -18,8 +18,8 @@ class Item {
   void display() {
     imageMode(CENTER);
     image(itemImg, loc.x, loc.y);
-    // show quantity of multiples
-    if (quantity > 1) {
+    // show quantity in bag for stacked items
+    if (quantity > 1 && ei.gameState == "paused") {
       fill(255);
       textSize(20);
       textAlign(CENTER);

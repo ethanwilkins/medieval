@@ -13,7 +13,7 @@ class Environment {
     characters = new ArrayList<Npc>();
     enemies = new ArrayList<Npc>();
     loot = new ArrayList<Item>();
-    questGiver = new Npc(width*0.9, 475, loadImage("questGiverLeft.png"));
+    questGiver = new Npc(width*0.8, 475, loadImage("questGiverLeft.png"));
     characters.add(questGiver);
   }
   
