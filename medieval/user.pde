@@ -22,9 +22,10 @@ class User {
     loc = new PVector(200, 475);
     destination = new PVector();
     actionState = "idle";
-    xp = kills = level = 0;
+    xp = kills = 0;
     distTraveled = 0;
     health = 1000;
+    level = 1;
     loadBag();
   }
   
@@ -124,7 +125,7 @@ class User {
   
   void loadBag() {
     gold = new Item(loc.x, loc.y,
-      loadImage("goldCoins.png"), "user/gold");
+      loadImage("goldCoins.png"), "gold");
     bag.add(gold);
   }
   

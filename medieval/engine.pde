@@ -1,5 +1,6 @@
 // Engine class ties the game together, interfacing all the classes to the main file, medieval
 // read xml in bootstrap to setup game based on last save
+// may need more xml files instead of nested elements
 
 class Engine {
   XML inventory, stats, text;
@@ -59,9 +60,21 @@ class Engine {
     }
   }
   
+  void saveGame() {
+    XML gold = inventory.getChild("gold");
+    inventory.removeChild(gold);
+    gold.setInt("quantity", user.gold.quantity);
+    inventory.addChild(gold);
+    if (displayWidth == 1280 && displayHeight == 720) {
+      createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
+      saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
+    } else saveXML(inventory, "data/gameData/inventory.xml");
+  }
+  
   void bootStrap() {
     // starts the game, can be called for restart
-    inventory = loadXML("gameData/inventory.xml");
+    // get xml from data, createOutput, check for saved game
+    inventory = loadXML("/storage/sdcard0/Medieval/gameData/inventory.xml");
     stats = loadXML("gameData/stats.xml");
     text = loadXML("gameData/text.xml");
     gameState = "classChoice";
