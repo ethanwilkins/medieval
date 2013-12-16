@@ -60,28 +60,48 @@ class Engine {
     }
   }
   
-  void saveGame() {
-    XML gold = inventory.getChild("gold");
-    inventory.removeChild(gold);
-    gold.setInt("quantity", user.gold.quantity);
-    inventory.addChild(gold);
-    if (displayWidth == 1280 && displayHeight == 720) {
-      createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
-      saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
-    } else saveXML(inventory, "data/gameData/inventory.xml");
-  }
-  
   void bootStrap() {
     // starts the game, can be called for restart
     // get xml from data, createOutput, check for saved game
-    inventory = loadXML("/storage/sdcard0/Medieval/gameData/inventory.xml");
-    stats = loadXML("gameData/stats.xml");
-    text = loadXML("gameData/text.xml");
+    // saveXML in if condition, make folder if false
+    loadGame();
     gameState = "classChoice";
     env = new Environment();
     // QuestGiver Display
     que = new Quest();
     user = new User();
     gui = new Gui();
+  }
+  
+  void loadGame() {
+    XML test;
+    try {
+      inventory = loadXML("/storage/sdcard0/Medieval/gameData/inventory.xml");
+      stats = loadXML("/storage/sdcard0/Medieval/gameData/stats.xml");
+      text = loadXML("gameData/text.xml");
+      test = inventory.getChild("gold");
+      } catch (Exception e) {
+          println("load game error");
+          inventory = loadXML("gameData/inventory.xml");
+          stats = loadXML("gameData/stats.xml");
+          text = loadXML("gameData/text.xml");
+    }
+  }
+  
+  void saveGame() {
+    XML gold = inventory.getChild("gold");
+    inventory.removeChild(gold);
+    gold.setInt("quantity", user.gold.quantity);
+    inventory.addChild(gold);
+    try {
+      saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
+      saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
+    } catch (Exception e) {
+        println("save game error");
+        createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
+        createOutput("/storage/sdcard0/Medieval/gameData/stats.xml");
+        saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
+        saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
+    }
   }
 }
