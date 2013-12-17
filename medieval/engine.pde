@@ -31,6 +31,7 @@ class Engine {
   
   void updateUserPress() {
     if (gameState == "game") {
+      user.lastPress = millis();
       user.getDestination();
       user.loot();
       // selection aftwerwards to override
@@ -78,6 +79,7 @@ class Engine {
       stats = loadXML("/storage/sdcard0/Medieval/gameData/stats.xml");
       text = loadXML("gameData/text.xml");
       XML test = inventory.getChild("gold");
+      println("load successful");
       } catch (Exception e) {
       inventory = loadXML("gameData/inventory.xml");
       stats = loadXML("gameData/stats.xml");
@@ -87,10 +89,8 @@ class Engine {
   }
   
   void saveGame() {
-    XML gold = inventory.getChild("gold");
-    inventory.removeChild(gold);
-    gold.setInt("quantity", user.gold.quantity);
-    inventory.addChild(gold);
+    saveItems();
+    saveStats();
     try {
       saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
       saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
@@ -100,6 +100,29 @@ class Engine {
       saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
       saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
       println("save game error caught");
+    }
+  }
+  
+  void saveItems() {
+    XML gold = inventory.getChild("gold");
+    inventory.removeChild(gold);
+    gold.setInt("quantity", user.gold.quantity);
+    inventory.addChild(gold);
+  }
+  
+  void saveStats() {
+    XML[] kids = stats.getChildren("stat");
+    for (int x=0; x < kids.length; x++) {
+      XML kid = kids[x];
+      stats.removeChild(kid);
+      if (kid.getContent().equals("Kills")) {
+        kid.setInt("quantity", user.kills);
+      } else if (kid.getContent().equals("XP")) {
+        kid.setInt("quantity", user.xp);
+      } else if (kid.getContent().equals("Level")) {
+        kid.setInt("level", user.level);
+      }
+      stats.addChild(kid);
     }
   }
 }

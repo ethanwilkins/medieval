@@ -13,7 +13,7 @@ class Warrior {
     walkRight6, walkLeft6,
     attRight1, attRight2, attRight3;
   String title, description;
-  int walkFrames, attFrames;
+  int attFrames;
   float maxHit, maxHealth, range;
   
   Warrior () {
@@ -35,7 +35,6 @@ class Warrior {
       user.destination.set(user.loc);
       // enable to load idle image
       user.actionState = "walking";
-      println(damageDealt);
     }
   }
   
@@ -86,14 +85,13 @@ class Warrior {
   }
   
   void displayWalk() {
-    walkFrames++;
     if (user.loc.dist(user.destination) > 5) {
       // warrior walks right
       if (user.destination.x > user.loc.x) {
         idleWarrior = idleRight;
         // only using two steps for now
-        switch (walkFrames) {
-          case 5:
+        switch (user.walkFrames) {
+          case 10:
             user.userImg = walkRight1;
             break;
           case 25:
@@ -115,8 +113,8 @@ class Warrior {
       } // warrior walks left
       else if (user.destination.x < user.loc.x) {
         idleWarrior = idleLeft;
-        switch (walkFrames) {
-          case 5:
+        switch (user.walkFrames) {
+          case 10:
             user.userImg = walkLeft1;
             break;
           case 25:
@@ -140,8 +138,8 @@ class Warrior {
   }
   
   void regulate() {
-    if (walkFrames > 85) {
-      walkFrames = 0;
+    if (user.walkFrames > 85) {
+      user.walkFrames = 0;
     }
   }
   

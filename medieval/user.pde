@@ -11,7 +11,7 @@ class User {
   ArrayList<Item> bag; Item gold;
   PVector loc, destination, speed;
   String actionState, chosenClass;
-  int xp, kills, level;
+  int xp, kills, level, walkFrames, lastPress;
   float health;
   
   User () {
@@ -23,7 +23,7 @@ class User {
     destination = new PVector();
     actionState = "idle";
     health = 1000;
-    level = 1;
+    loadStats();
     loadBag();
   }
   
@@ -51,6 +51,7 @@ class User {
   
   void walk() {
     // walk animation for class
+    walkFrames++;
     if (actionState == "walking" || actionState == "targeting") {
       if (chosenClass == "warrior") {
         warrior.displayWalk();
@@ -119,6 +120,10 @@ class User {
       actionState = "walking";
       destination.x = mouseX;
       destination.y = loc.y;
+      // assures regular stride
+      if (lastPress < millis()-300) {
+        walkFrames = 10;
+      }
     }
   }
   
@@ -126,6 +131,20 @@ class User {
     gold = new Item(loc.x, loc.y,
       loadImage("goldCoins.png"), "gold");
     bag.add(gold);
+  }
+  
+  void loadStats() {
+    XML[] kids = ei.stats.getChildren("stat");
+    for (int x=0; x < kids.length; x++) {
+      XML kid = kids[x];
+      if (kid.getContent().equals("Kills")) {
+        kills = kid.getInt("quantity");
+      } else if (kid.getContent().equals("XP")) {
+        xp = kid.getInt("quantity");
+      } else if (kid.getContent().equals("Level")) {
+        level = kid.getInt("level");
+      }
+    }
   }
   
   void setUserClass(String classChoice) {
@@ -145,6 +164,12 @@ class User {
   }
   
   void regulate() {
+    if (xp > 2000) {
+      level = 3;
+    } else if (xp > 1000) {
+      level = 2;
+    }
+    // class specific regulation
     if (chosenClass == "warrior") {
       warrior.regulate();
     } else if (chosenClass == "wizard") {

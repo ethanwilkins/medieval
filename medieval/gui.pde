@@ -3,7 +3,7 @@
 
 class Gui {
   Button warrior, wizard, ranger, forward, backward,
-    pause, resume, items, spells, quests, stats, save;
+    pause, resume, items, spells, quests, stats;
   PImage pauseTab, pauseTab1, pauseTab2, pauseTab3;
   String guiState;
   int choiceState;
@@ -20,7 +20,6 @@ class Gui {
     spells = new Button(540, 75, loadImage("gui/spellsButton.png"));
     quests = new Button(815, 75, loadImage("gui/questsButton.png"));
     stats = new Button(1085, 75, loadImage("gui/statsButton.png"));
-    save = new Button(1000, height*0.6, loadImage("goldCoins.png"));
     pauseTab = loadImage("gui/pauseTab.png");
     pauseTab1 = loadImage("gui/pauseTab1.png");
     pauseTab2 = loadImage("gui/pauseTab2.png");
@@ -70,11 +69,10 @@ class Gui {
     textSize(25);
     textAlign(CENTER);
     text("Class: " + user.chosenClass, width/2, height*0.4);
-    text("Kills: " + user.kills, width/2, height*0.5);
-    text("XP: " + user.xp, width/2, height*0.6);
-    text("Gold: " + user.gold.quantity, width/2, height*0.7);
-    text("Save", 1000, height*0.54);
-    save.display();
+    text("Gold: " + user.gold.quantity, width/2, height*0.5);
+    text("Kills: " + user.kills, width/2, height*0.6);
+    text("XP: " + user.xp, width/2, height*0.7);
+    text("Level: " + user.level, width/2, height*0.8);
   }
   
   void displayClassChoice() {
@@ -121,8 +119,6 @@ class Gui {
       guiState = "quests";
     } else if (stats.overButton()) {
       guiState = "stats";
-    } else if (guiState == "stats" && save.overButton()) {
-      ei.saveGame();
     }
   }
   
@@ -130,6 +126,7 @@ class Gui {
     if (pause.overButton()) {
       ei.gameState = "paused";
       loadInventoryScreen();
+      ei.saveGame();
     }
   }
   

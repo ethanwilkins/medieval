@@ -39,6 +39,8 @@ class Npc {
       timeOfDeath = millis();
       env.loot.add(gold);
       bag.remove(gold);
+      user.xp += 50;
+      user.kills++;
     }
   }
   
