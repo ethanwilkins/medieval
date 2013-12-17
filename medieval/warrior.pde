@@ -64,26 +64,22 @@ class Warrior {
     // start at raising sword at new fight
     // cycles through attack poses as frames pass
     attFrames++;
-    if (attFrames % attSpeed == 0) {
-      if (attPose < 4) {
-        attPose++;
-      } else attPose = 0;
-    }
-    switch (attPose) {
-      case 0:
+    switch (int(attFrames)) {
+      case 5:
         user.userImg = attRight1;
         break;
-      case 1:
+      case 20:
         user.userImg = attRight2;
         break;
-      case 2:
+      case 25:
         user.userImg = attRight3;
         break;
-      case 3:
+      case 30:
         user.userImg = attRight2;
         break;
-      case 4:
+      case 35:
         user.userImg = attRight1;
+        attFrames = 0;
         break;
     }
   }

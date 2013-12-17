@@ -62,8 +62,6 @@ class Engine {
   
   void bootStrap() {
     // starts the game, can be called for restart
-    // get xml from data, createOutput, check for saved game
-    // saveXML in if condition, make folder if false
     loadGame();
     gameState = "classChoice";
     env = new Environment();
@@ -74,17 +72,17 @@ class Engine {
   }
   
   void loadGame() {
-    XML test;
+    // get xml from data, createOutput, check for saved game
     try {
       inventory = loadXML("/storage/sdcard0/Medieval/gameData/inventory.xml");
       stats = loadXML("/storage/sdcard0/Medieval/gameData/stats.xml");
       text = loadXML("gameData/text.xml");
-      test = inventory.getChild("gold");
+      XML test = inventory.getChild("gold");
       } catch (Exception e) {
-          println("load game error");
-          inventory = loadXML("gameData/inventory.xml");
-          stats = loadXML("gameData/stats.xml");
-          text = loadXML("gameData/text.xml");
+      println("load game error");
+      inventory = loadXML("gameData/inventory.xml");
+      stats = loadXML("gameData/stats.xml");
+      text = loadXML("gameData/text.xml");
     }
   }
   
@@ -97,11 +95,11 @@ class Engine {
       saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
       saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
     } catch (Exception e) {
-        println("save game error");
-        createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
-        createOutput("/storage/sdcard0/Medieval/gameData/stats.xml");
-        saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
-        saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
+      println("save game error");
+      createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
+      createOutput("/storage/sdcard0/Medieval/gameData/stats.xml");
+      saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
+      saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
     }
   }
 }
