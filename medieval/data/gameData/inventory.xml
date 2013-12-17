@@ -6,7 +6,7 @@
   </warrior>
   <wizard>
     <weapon name="staff" quantity="1">Staff</weapon>
-    <item name="mana" quantity="2">Mana</item>
+    <item name="mana" quantity="2">Scroll</item>
   </wizard>
   <ranger>
     <weapon name="bow" quantity="1">Bow</weapon>

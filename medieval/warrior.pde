@@ -13,7 +13,7 @@ class Warrior {
     walkRight6, walkLeft6,
     attRight1, attRight2, attRight3;
   String title, description;
-  int step, attPose, attFrames, attSpeed;
+  int walkFrames, attFrames;
   float maxHit, maxHealth, range;
   
   Warrior () {
@@ -21,20 +21,21 @@ class Warrior {
     speed = new PVector(2.5, 0);
     description = "Slay your enemies with sword and shield.";
     title = "Warrior";
+    attFrames = 1;
     maxHit = 500;
     range = 150;
-    attSpeed = 9;
   }
   
   void quickAttack() {
     float damageDealt;
-    if (attFrames % attSpeed == 0 && attPose == 4) {
+    if (attFrames == 0) {
       damageDealt = random(1, maxHit);
       user.target.health -= damageDealt;
       // so user doesn't walk over enemy
       user.destination.set(user.loc);
       // enable to load idle image
       user.actionState = "walking";
+      println(damageDealt);
     }
   }
   
@@ -84,63 +85,64 @@ class Warrior {
     }
   }
   
-  void walk() {
-    // change step image if distTraveled
-    if (user.distTraveled % 7 == 0) {
-      if (step < 5) {
-        step++;
-      } else step = 0;
-    }
+  void displayWalk() {
+    walkFrames++;
     if (user.loc.dist(user.destination) > 5) {
       // warrior walks right
       if (user.destination.x > user.loc.x) {
         idleWarrior = idleRight;
         // only using two steps for now
-        switch (step) {
-          case 0:
+        switch (walkFrames) {
+          case 5:
             user.userImg = walkRight1;
             break;
-          case 1:
+          case 25:
             user.userImg = walkRight2;
             break;
-          case 2:
+          case 40:
             user.userImg = walkRight3;
             break;
-          case 3:
+          case 55:
             user.userImg = walkRight1;
             break;
-          case 4:
+          case 70:
             user.userImg = walkRight5;
             break;
-          case 5:
+          case 85:
             user.userImg = walkRight6;
             break;
         }
       } // warrior walks left
       else if (user.destination.x < user.loc.x) {
         idleWarrior = idleLeft;
-        switch (step) {
-          case 0:
+        switch (walkFrames) {
+          case 5:
             user.userImg = walkLeft1;
             break;
-          case 1:
+          case 25:
             user.userImg = walkLeft2;
             break;
-          case 2:
+          case 40:
             user.userImg = walkLeft3;
             break;
-          case 3:
+          case 55:
             user.userImg = walkLeft1;
             break;
-          case 4:
+          case 70:
             user.userImg = walkLeft5;
             break;
-          case 5:
+          case 85:
             user.userImg = walkLeft6;
             break;
         }
       }
     } else user.userImg = idleWarrior;
+  }
+  
+  void regulate() {
+    if (walkFrames > 85) {
+      walkFrames = 0;
+    }
   }
   
   void loadWarrior() {

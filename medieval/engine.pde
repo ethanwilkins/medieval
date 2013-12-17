@@ -79,10 +79,10 @@ class Engine {
       text = loadXML("gameData/text.xml");
       XML test = inventory.getChild("gold");
       } catch (Exception e) {
-      println("load game error");
       inventory = loadXML("gameData/inventory.xml");
       stats = loadXML("gameData/stats.xml");
       text = loadXML("gameData/text.xml");
+      println("load game error caught");
     }
   }
   
@@ -95,11 +95,11 @@ class Engine {
       saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
       saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
     } catch (Exception e) {
-      println("save game error");
       createOutput("/storage/sdcard0/Medieval/gameData/inventory.xml");
       createOutput("/storage/sdcard0/Medieval/gameData/stats.xml");
       saveXML(inventory, "/storage/sdcard0/Medieval/gameData/inventory.xml");
       saveXML(stats, "/storage/sdcard0/Medieval/gameData/stats.xml");
+      println("save game error caught");
     }
   }
 }

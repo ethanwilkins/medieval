@@ -11,8 +11,8 @@ class User {
   ArrayList<Item> bag; Item gold;
   PVector loc, destination, speed;
   String actionState, chosenClass;
-  float distTraveled, health;
   int xp, kills, level;
+  float health;
   
   User () {
     warrior = new Warrior();
@@ -22,8 +22,6 @@ class User {
     loc = new PVector(200, 475);
     destination = new PVector();
     actionState = "idle";
-    xp = kills = 0;
-    distTraveled = 0;
     health = 1000;
     level = 1;
     loadBag();
@@ -33,6 +31,7 @@ class User {
     walk();
     target();
     attack();
+    regulate();
     imageMode(CENTER);
     image(userImg, loc.x, loc.y);
   }
@@ -54,7 +53,7 @@ class User {
     // walk animation for class
     if (actionState == "walking" || actionState == "targeting") {
       if (chosenClass == "warrior") {
-        warrior.walk();
+        warrior.displayWalk();
       } else if (chosenClass == "wizard") {
         wizard.walk();
       } else if (chosenClass == "ranger") {
@@ -66,8 +65,7 @@ class User {
           loc.add(speed);
         } else if (destination.x < loc.x) {
           loc.sub(speed);
-        } // dist for walk animation
-        distTraveled += speed.x;
+        }
       } else actionState = "idle";
     }
   }
@@ -102,12 +100,13 @@ class User {
     for (int x=0; x < env.loot.size(); x++) {
       Item item = env.loot.get(x);
       if (item.overItem()) {
-        if (item.name == gold.name) {
+        if (item.name.equals(gold.name)) {
           gold.quantity += item.quantity;
         } else {
           // unable to transfer, make copy instead
           bag.add(new Item(loc.x, loc.y,
           item.itemImg, item.path));
+          println(item.name + " != " + gold.name);
         }
         env.loot.remove(item);
       }
@@ -143,5 +142,15 @@ class User {
         userImg = warrior.idleRight;
     }
     ei.gameState = "game";
+  }
+  
+  void regulate() {
+    if (chosenClass == "warrior") {
+      warrior.regulate();
+    } else if (chosenClass == "wizard") {
+      
+    } else if (chosenClass == "ranger") {
+      
+    }
   }
 }

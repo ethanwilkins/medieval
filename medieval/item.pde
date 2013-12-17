@@ -2,7 +2,7 @@ class Item {
   PVector loc;
   PImage itemImg;
   XML element;
-  String name, path;
+  String name, content, path;
   int quantity;
   float w, h;
   
@@ -31,6 +31,7 @@ class Item {
     element = ei.inventory.getChild(itemPath);
     quantity = element.getInt("quantity");
     name = element.getString("name");
+    content = element.getContent();
   }
   
   boolean overItem() {
