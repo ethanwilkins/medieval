@@ -1,14 +1,16 @@
 class Npc {
-  PImage npcImg;
+  PImage npcImg, blood;
   PVector loc;
   ArrayList<Item> bag; Item gold;
   float w, h, health,
-    timeOfDeath;
+    timeOfDeath, lastBled;
   String actionState;
+  boolean bleeding;
   int level;
   
   Npc (float x, float y, PImage img) {
     npcImg = img;
+    blood = loadImage("blood.png");
     loc = new PVector(x, y);
     bag = new ArrayList<Item>();
     actionState = "idle";
@@ -23,6 +25,8 @@ class Npc {
     if (actionState != "dead") {
       imageMode(CENTER);
       image(npcImg, loc.x, loc.y);
+      regulate();
+      bleed();
       death();
     }
   }
@@ -31,6 +35,12 @@ class Npc {
     gold = new Item(loc.x, loc.y+150,
       loadImage("goldCoins.png"), "loot/gold");
     bag.add(gold);
+  }
+  
+  void bleed() {
+    if (bleeding) {
+      image(blood, loc.x, loc.y-75);
+    }
   }
   
   void death() {
@@ -50,6 +60,12 @@ class Npc {
     } else if (timeOfDeath < millis()-15000) {
 //        env.enemies.remove(this);
 //        env.characters.remove(this);
+    }
+  }
+  
+  void regulate() {
+    if (lastBled < millis()-400) {
+      bleeding = false;
     }
   }
   

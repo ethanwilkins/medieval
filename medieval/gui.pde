@@ -25,7 +25,6 @@ class Gui {
     pauseTab2 = loadImage("gui/pauseTab2.png");
     pauseTab3 = loadImage("gui/pauseTab3.png");
     guiState = "items";
-    choiceState = 0;
   }
   
   void displayPauseScreen() {

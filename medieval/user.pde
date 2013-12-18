@@ -82,8 +82,8 @@ class User {
   }
   
   void selection() {
-    for (int x=0; x < env.characters.size(); x++) {
-      Npc npc = env.characters.get(x);
+    for (int x=0; x < env.enemies.size(); x++) {
+      Npc npc = env.enemies.get(x);
       if (npc.overNpc() && npc.actionState != "dead") {
         target = npc;
         if (chosenClass == "warrior") {

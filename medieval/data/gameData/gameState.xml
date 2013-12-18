@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gameState>
+	<state state="classChoice">gameState</state>
+	<state state="items">guiState</state>
+</gameState>

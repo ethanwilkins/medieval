@@ -79,6 +79,8 @@ class Warrior {
         break;
       case 35:
         user.userImg = attRight1;
+        user.target.bleeding = true;
+        user.target.lastBled = millis();
         attFrames = 0;
         break;
     }

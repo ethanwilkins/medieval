@@ -6,7 +6,7 @@ class Environment {
   ArrayList<Npc> characters;
   ArrayList<Npc> enemies;
   ArrayList<Item> loot;
-  Npc questGiver;
+  Npc questGiver, goblin;
   
   Environment () {
     background = loadImage("background.png");
@@ -14,14 +14,16 @@ class Environment {
     enemies = new ArrayList<Npc>();
     loot = new ArrayList<Item>();
     questGiver = new Npc(width*0.8, 475, loadImage("questGiverLeft.png"));
+    goblin = new Npc(width*0.8, 475, loadImage("goblinLeft.png"));
     characters.add(questGiver);
+    enemies.add(goblin);
   }
   
   void update() {
     imageMode(CORNER);
     image(background, 0, 0);
-    for (int x=0; x < characters.size(); x++) {
-      Npc npc = characters.get(x);
+    for (int x=0; x < enemies.size(); x++) {
+      Npc npc = enemies.get(x);
       npc.update();
     }
     displayItems();
@@ -41,15 +43,11 @@ class Environment {
   
   void respawn() {
     // temporary test respawn
-    for (int x=0; x < characters.size(); x++) {
-      Npc npc = characters.get(x);
+    for (int x=0; x < enemies.size(); x++) {
+      Npc npc = enemies.get(x);
       if (npc.actionState == "dead" && npc.timeOfDeath < millis()-5000) {
-        if (npc == questGiver) {
-          questGiver = new Npc(width*0.9, 475, loadImage("questGiverLeft.png"));
-        } else {
-          npc.actionState = "idle";
-          npc.health = 1000;
-        }
+        npc.actionState = "idle";
+        npc.health = 1000;
       }
     }
   }
