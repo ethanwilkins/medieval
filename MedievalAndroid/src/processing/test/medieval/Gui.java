@@ -22,7 +22,7 @@ public class Gui {
     Gui (PApplet p) {
         parent = p;
         warrior = new Button(p.width*0.3f, p.height*0.48f, medieval.user.warrior.idleRight);
-        wizard = new Button(p.width*0.3f, p.height*0.48f, medieval.user.warrior.idleRight);
+        wizard = new Button(p.width*0.3f, p.height*0.48f, medieval.user.wizard.idleRight);
         ranger = new Button(p.width*0.3f, p.height*0.48f, medieval.user.warrior.idleRight);
         forward = new Button(p.width*0.9f, p.height/2, p.loadImage("gui/forward.png"));
         backward = new Button(p.width*0.1f, p.height/2, p.loadImage("gui/backward.png"));

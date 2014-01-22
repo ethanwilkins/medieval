@@ -41,6 +41,7 @@ public void mousePressed() {
 public void mouseReleased() {
   ei.checkButtons();
 }
+
   public int sketchWidth() { return 1280; }
   public int sketchHeight() { return 720; }
 }

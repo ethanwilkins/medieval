@@ -71,7 +71,7 @@ public class User {
             if (chosenClass == "warrior") {
                 warrior.displayWalk();
             } else if (chosenClass == "wizard") {
-                wizard.walk();
+                wizard.displayWalk();
             } else if (chosenClass == "ranger") {
                 ranger.walk();
             }
@@ -170,7 +170,8 @@ public class User {
             speed = warrior.speed;
         } else if (classChoice == "wizard") {
             chosenClass = "wizard";
-            userImg = warrior.idleRight;
+            userImg = wizard.idleRight;
+            speed = wizard.speed;
         } else if (classChoice == "ranger") {
             chosenClass = "ranger";
             userImg = warrior.idleRight;
