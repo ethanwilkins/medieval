@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inventory>
+  <warrior>
+    <weapon name="sword" quantity="1">Sword</weapon>
+    <item name="ale" quantity="1">Ale</item>
+  </warrior>
+  <wizard>
+    <weapon name="staff" quantity="1">Staff</weapon>
+    <item name="mana" quantity="2">Scroll</item>
+  </wizard>
+  <ranger>
+    <weapon name="bow" quantity="1">Bow</weapon>
+    <weapon name="arrow" quantity="50">Arrow</weapon>
+  </ranger>
+  <loot>
+    <gold name="gold" quantity="2">Gold</gold>
+    <item name="sapphire" quantity="0">Sapphire</item>
+    <item name="emerald" quantity="0">Emerald</item>
+    <item name="ruby" quantity="0">Ruby</item>
+  </loot>
+  <gold name="gold" quantity="5">Gold</gold>
+</inventory>
