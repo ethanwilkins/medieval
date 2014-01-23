@@ -38,6 +38,7 @@ public class Engine {
             medieval.gui.displayClassChoice();
         } else if (gameState == "game") {
             medieval.gui.pause.display();
+            parent.text(Math.round(parent.frameRate), parent.width-50, 50);
         } else if (gameState == "paused") {
             medieval.gui.displayPauseScreen();
         }
